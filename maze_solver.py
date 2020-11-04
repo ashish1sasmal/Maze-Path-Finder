@@ -96,3 +96,5 @@ for Point in path[1:]:
     x0,y0=Point
     cv2.imshow("Output",img)
     cv2.waitKey(0)
+
+cv2.imwrite("Result/result2.png",img)
