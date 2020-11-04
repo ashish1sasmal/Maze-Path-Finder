@@ -48,8 +48,8 @@ def getNeighbors(matrix,x,y):
 
 img = cv2.imread(f"Test/{sys.argv[1]}",0)
 print("[ Image Loading ... ]")
-src = (119,8)
-dst = (108,108)
+src = (94,409)
+dst = (210,235)
 matrix =[]
 
 rows,cols=img.shape[0],img.shape[1]
@@ -106,6 +106,6 @@ for Point in path[1:]:
     cv2.imshow("Output",img)
     cv2.waitKey(0)
 
-cv2.imwrite("Result/result2.png",img)
+cv2.imwrite("Result/result3.png",img)
 
 print("[ Success ]")
