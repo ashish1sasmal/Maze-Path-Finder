@@ -18,8 +18,6 @@ class Point:
         self.d=float('inf')
         self.parent = None
 
-
-
 def build(img,srcx,srcy,matrix,q):
     rows,cols=img.shape[0],img.shape[1]
     for r in range(rows):
@@ -49,35 +47,45 @@ def getNeighbors(matrix,x,y):
 
 
 img = cv2.imread(f"Test/{sys.argv[1]}",0)
+print("[ Image Loading ... ]")
+src = (119,8)
+dst = (108,108)
 matrix =[]
+
 rows,cols=img.shape[0],img.shape[1]
+
+#   Initializing Matrix
 for r in range(rows):
     matrix.append([0]*cols)
 
-src = (119,8)
 q=[]
+
+print("[ Initiating Build ... ]")
 build(img,src[0],src[1],matrix,q)
-print(len(matrix),len(matrix[0]))
-print(img.shape)
+print("[ Finished Build ... ]")
 
 heappush(q,matrix[src[1]][src[0]])
 
 c=0
+
+start_time = time.time()
+print("[ Initiating Path Finder ... ]")
 while q!=[]:
     c+=1
     u = heappop(q)
     neighbors = getNeighbors(matrix,u.y,u.x)
     # print(neighbors)
     for v in neighbors:
-        dst = eqDis(img,(u.y,u.x),(v.y,v.x))
-        if u.d+dst<v.d:
-            v.d = u.d+dst
+        d = eqDis(img,(u.y,u.x),(v.y,v.x))
+        if u.d+d<v.d:
+            v.d = u.d+d
             v.parent = (u.x,u.y)
             heappush(q,v)
 
-print(c)
-dst = (108,108)
+print("[ Path Found ]")
+print(f"Time Taken : {time.time()-start_time}")
 path=[]
+print(dst[1],dst[0])
 temp=matrix[dst[1]][dst[0]]
 path.append((dst[0],dst[1]))
 c=0
@@ -89,6 +97,7 @@ path.append((src[0],src[1]))
 print(len(path))
 img = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
 
+print("[ Drawing Path ... ]")
 x0,y0=path[0]
 for Point in path[1:]:
     x1,y1=Point
@@ -98,3 +107,5 @@ for Point in path[1:]:
     cv2.waitKey(0)
 
 cv2.imwrite("Result/result2.png",img)
+
+print("[ Success ]")
