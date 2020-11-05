@@ -48,8 +48,8 @@ def getNeighbors(matrix,x,y):
 
 img = cv2.imread(f"Test/{sys.argv[1]}",0)
 print("[ Image Loading ... ]")
-src = (94,409)
-dst = (210,235)
+src = (264,17)
+dst = (256,264)
 matrix =[]
 
 rows,cols=img.shape[0],img.shape[1]
