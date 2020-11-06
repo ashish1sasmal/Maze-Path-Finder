@@ -1,7 +1,7 @@
 # @Author: ASHISH SASMAL <ashish>
 # @Date:   04-11-2020
 # @Last modified by:   ashish
-# @Last modified time: 05-11-2020
+# @Last modified time: 06-11-2020
 
 
 
@@ -48,8 +48,8 @@ def getNeighbors(matrix,x,y):
 
 img = cv2.imread(f"Test/{sys.argv[1]}",0)
 print("[ Image Loading ... ]")
-src = (264,17)
-dst = (256,264)
+src = (257, 261)
+dst = (265,8)
 matrix =[]
 
 rows,cols=img.shape[0],img.shape[1]
@@ -98,6 +98,7 @@ print(len(path))
 img = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
 
 print("[ Drawing Path ... ]")
+
 x0,y0=path[0]
 for Point in path[1:]:
     x1,y1=Point
@@ -106,6 +107,13 @@ for Point in path[1:]:
     cv2.imshow("Output",img)
     cv2.waitKey(0)
 
-cv2.imwrite("Result/result3.png",img)
+img = cv2.putText(img, 'Disco!', (15,50), cv2.FONT_HERSHEY_SIMPLEX ,
+                   1, (18,18,255), 2, cv2.LINE_AA)
+
+for i in range(100000):
+    cv2.imshow("Output",img)
+    cv2.waitKey(0)
+
+cv2.imwrite("Result/result4.png",img)
 
 print("[ Success ]")
