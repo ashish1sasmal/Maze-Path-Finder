@@ -110,7 +110,7 @@ for Point in path[1:]:
 img = cv2.putText(img, 'Disco!', (15,50), cv2.FONT_HERSHEY_SIMPLEX ,
                    1, (18,18,255), 2, cv2.LINE_AA)
 
-for i in range(100000):
+for i in range(10):
     cv2.imshow("Output",img)
     cv2.waitKey(0)
 
